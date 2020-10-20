@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default LinksPage = () => {
+export default () => {
     return (
         <div>
             <h1>Links page</h1>

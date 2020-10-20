@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default DetailPage = () => {
+export default () => {
     return (
         <div>
             <h1>Detail Page</h1>
