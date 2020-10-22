@@ -1,9 +1,20 @@
+// @ts-check
+
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useHttp } from '../hooks/http.hook';
+import { useMessage } from '../hooks/message.hook';
+
 
 export default () => {
-  const { isLoading, error, makeRequest } = useHttp();
+  const { isLoading, error, makeRequest, clearError } = useHttp();
   const [form, setForm] = useState({ email: '', password: '' });
+  const showMessage = useMessage();
+
+  useEffect(() => { // TODO proccess errors array
+    showMessage(error);
+    clearError();
+  }, [error, showMessage, clearError]);
 
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -12,7 +23,14 @@ export default () => {
   const handleRegister = async () => {
     try {
       const data = await makeRequest('/api/register', 'POST', { ...form }); // must be api/auth/register
-      console.log(data)
+      showMessage(data.message);
+    } catch (e) {}
+  };
+
+  const handleLogin = async () => {
+    try {
+      const data = await makeRequest('/api/login', 'POST', { ...form }); // must be api/auth/login
+      showMessage(data.message);
     } catch (e) {}
   };
 
@@ -39,8 +57,8 @@ export default () => {
               </div>
             </div>
             <div className="card-action">
-              <a className="waves-effect waves-light btn mr-6" disabled={isLoading}>Sign in</a>
-              <a className="waves-effect waves-light btn" onClick={handleRegister} disabled={isLoading}>Register</a>
+              <button className="waves-effect waves-light btn mr-6" onClick={handleLogin} disabled={isLoading}>Sign in</button>
+              <button className="waves-effect waves-light btn" onClick={handleRegister} disabled={isLoading}>Register</button>
             </div>
           </div>
         </div>

@@ -23,7 +23,6 @@ export const useRoutes = (isAuthenticated) => {
                     <Redirect to="/create" />
                 </Switch>
             </Router>
-         
         )
     }
     return (
