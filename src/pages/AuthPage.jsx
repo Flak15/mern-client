@@ -1,12 +1,14 @@
 // @ts-check
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
 
 
 export default () => {
+  const auth = useContext(AuthContext);
   const { isLoading, error, makeRequest, clearError } = useHttp();
   const [form, setForm] = useState({ email: '', password: '' });
   const showMessage = useMessage();
@@ -30,7 +32,7 @@ export default () => {
   const handleLogin = async () => {
     try {
       const data = await makeRequest('/api/login', 'POST', { ...form }); // must be api/auth/login
-      showMessage(data.message);
+      auth.login(data.token, data.id);
     } catch (e) {}
   };
 
