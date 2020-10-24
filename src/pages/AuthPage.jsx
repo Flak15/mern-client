@@ -32,7 +32,7 @@ export default () => {
   const handleLogin = async () => {
     try {
       const data = await makeRequest('/api/login', 'POST', { ...form }); // must be api/auth/login
-      auth.login(data.token, data.id);
+      auth.login(data.token, data.userId);
     } catch (e) {}
   };
 
