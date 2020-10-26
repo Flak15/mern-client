@@ -24,14 +24,14 @@ export default () => {
   
   const handleRegister = async () => {
     try {
-      const data = await makeRequest('/api/register', 'POST', { ...form }); // must be api/auth/register
+      const data = await makeRequest('/api/auth/register', 'POST', { ...form }); // must be api/auth/register
       showMessage(data.message);
     } catch (e) {}
   };
 
   const handleLogin = async () => {
     try {
-      const data = await makeRequest('/api/login', 'POST', { ...form }); // must be api/auth/login
+      const data = await makeRequest('/api/auth/login', 'POST', { ...form }); // must be api/auth/login
       auth.login(data.token, data.userId);
     } catch (e) {}
   };
