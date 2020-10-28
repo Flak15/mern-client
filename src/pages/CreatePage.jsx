@@ -17,7 +17,7 @@ export default () => {
     event.preventDefault();
     try {
       const res = await makeRequest('/api/link/generate', 'POST', { from: link }, { Authorization: `Bearer ${auth.token}`});
-      console.log(res);
+      history.push(`/details/${res.link._id}`);
       
     } catch (e) {
       console.log(e);

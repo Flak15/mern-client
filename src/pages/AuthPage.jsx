@@ -48,13 +48,13 @@ export default () => {
               <div className="row">
                 <div className="input-field col">
                   <input placeholder="Your email" id="email" type="text" className="validate" name="email" onChange={handleChange} value={form.email} />
-                  <label htmlFor="disabled">Email</label>
+                  <label className="active" htmlFor="disabled">Email</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col">
                   <input placeholder="Your password" id="password" type="password" className="validate" name="password" onChange={handleChange} value={form.password} />
-                  <label htmlFor="password">Password</label>
+                  <label className="active" htmlFor="password">Password</label>
                 </div>
               </div>
             </div>
