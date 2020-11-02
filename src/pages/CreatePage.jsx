@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
-import { useMessage } from '../hooks/message.hook';
 
 export default () => {
   const auth = useContext(AuthContext);
