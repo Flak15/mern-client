@@ -6,7 +6,7 @@ import { useHttp } from '../hooks/http.hook';
 export default () => {
   const auth = useContext(AuthContext);
   const [link, setLink] = useState('');
-  const {makeRequest} = useHttp();
+  const { makeRequest } = useHttp();
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -19,7 +19,11 @@ export default () => {
       history.push(`/details/${res.link._id}`);
       
     } catch (e) {
-      console.log(e);
+      const errMessage = JSON.parse(e.message);
+      console.log(errMessage.name);
+      // if (errMessage.name === 'TokenExpiredError') {
+      //   return auth.logout();
+      // }
     }
     setLink('');
   };

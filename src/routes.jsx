@@ -27,7 +27,7 @@ export const useRoutes = (isAuthenticated) => {
             <Route path="/auth" exact>
                 <AuthPage />
             </Route>
-            <Redirect to="/" />
+            <Redirect to="/auth" />
         </Switch>
     )
 };

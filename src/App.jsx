@@ -7,7 +7,8 @@ import { Navbar } from './components/Navbar';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Loader from './components/Loader.jsx';
 
-function App() {
+
+const App = () => {
   const { token, userId, login, logout, ready } = useAuth();
   const isAuthenticated = !!token;
   const routes = useRoutes(isAuthenticated);

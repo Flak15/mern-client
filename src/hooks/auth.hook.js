@@ -1,9 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
+import { useHttp } from './http.hook';
 
 export const useAuth = () => {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   const [ready, setReady] = useState(false);
+  const { makeRequest } = useHttp();
 
   const login = useCallback((jwt, id) => {
     setToken(jwt);
@@ -19,12 +21,18 @@ export const useAuth = () => {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('user'));
-    if (data && data.token) {
-      login(data.token, data.userId);
-    }
-    setReady(true);
-  }, [login]);
+    const validateToken = async (authData) => {
+      try {
+        await makeRequest('/api/auth/verify', 'POST', { token: authData.token });
+        login(authData.token, authData.userId);
+      } catch (e) {
+        logout();
+      }
+      setReady(true);
+    };
+    validateToken(data);
+  }, [login, makeRequest, logout]);
   return {
-    token, userId, login, logout, ready
+    token, userId, login, logout, ready,
   };
 };
